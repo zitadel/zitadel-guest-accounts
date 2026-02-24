@@ -69,23 +69,28 @@ npm install
 To make the "Shadow Account" architecture work, Zitadel needs to explicitly allow your backend to create and impersonate users on the fly. Here is the exact configuration required in your Zitadel Console:
 
 #### A. Create the Application
-1. Navigate to your Project and create a new **Web Application**.
-2. **Redirect URIs:** Add `http://localhost:3000/api/auth/callback/zitadel`.
-3. **Post Logout URIs:** Add `http://localhost:3000/`.
-4. **Auth Method:** Change the authentication method to **POST** (Client Secret POST).
-5. **OIDC Grant Types:** Explicitly enable the **Token Exchange** flow. This is strictly required for the backend to swap its service token for the guest's impersonated ID token.
-6. Copy the **Client ID** and **Client Secret** (you will need these for your `.env.local`).
+
+Navigate to your Project and create a new **Application**.
+1. Select a name and application type, in this case **Web**
+2. **Auth Method:** Change the authentication method to **PKCE**.
+3. **Redirect URIs:** Enable development for http Redirect URIs. Add `http://localhost:3000/api/auth/callback/zitadel`. 
+4. **Post Logout URIs:** Add `http://localhost:3000/`.
+5. **Verify overview and Create:** Make sure all your settings are correct.
+6. Copy the **Client ID** (you will need these for your `.env.local`).
+7. **Grant Types:** Explicitly enable the **Token Exchange** flow. This is strictly required for the backend to swap its service token for the guest's impersonated ID token.
+8. **Token Settings:** Change the Auth token type to `JWT`, and toggle on the option to include user profile in the ID token.
 
 #### B. Create the Service Account (For the Backend APIs)
+
 1. Go to your Organization -> Users and create a **Service Account**.
 2. Generate a **Personal Access Token (PAT)** for this user and copy it safely. This will be the master key your Next.js API routes use to communicate with Zitadel.
+3. Go back to the **Default Settings** section of your Instance.
+4. Assign the **IAM End User Impersonator** and **IAM User Manager** role to the service account you created. 
 
 #### C. Enable Impersonation
 
 1. Go to your **Instance Settings** -> **Security Settings**.
 2. Find the Impersonation policies and explicitly **Enable Impersonation**.
-3. Go back to the **Default Settings** section of your Instance.
-4. Assign the **IAM End User Impersonator** role to the service account you created in Step B. 
 
 This specific combination gives your Next.js backend the authority to silently create users and immediately act on their behalf without them ever seeing a login screen!
 
@@ -99,9 +104,8 @@ NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=generate_a_random_secret_string_here
 
 # Zitadel App Settings
-ZITADEL_ISSUER=[https://your-instance-domain.zitadel.cloud](https://your-instance-domain.zitadel.cloud)
+ZITADEL_ISSUER=https://your-instance-domain.zitadel.cloud
 ZITADEL_CLIENT_ID=your_app_client_id
-ZITADEL_CLIENT_SECRET=your_app_client_secret
 
 # Zitadel Service Account Settings (For the Backend APIs)
 ZITADEL_MACHINE_USER_PAT=your_machine_user_personal_access_token

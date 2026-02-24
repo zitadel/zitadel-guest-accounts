@@ -8,9 +8,11 @@ export const authOptions = {
   providers: [
     ZitadelProvider({
       clientId: process.env.ZITADEL_CLIENT_ID,
-      clientSecret: process.env.ZITADEL_CLIENT_SECRET,
       issuer: process.env.ZITADEL_ISSUER,
-      authorization: { params: { scope: "openid email profile offline_access" } },
+      authorization: { params: { scope: `openid profile email urn:zitadel:iam:org:id:${process.env.ZITADEL_ORG_ID}` } },
+      client: {
+        token_endpoint_auth_method: "none",
+      },
     }),
   ],
   callbacks: {
@@ -19,7 +21,7 @@ export const authOptions = {
       if (account && user) {
         token.accessToken = account.access_token;
         token.idToken = account.id_token;
-        token.userId = user.id; 
+        token.userId = user.id;
 
         // --- GUEST CART MERGE LOGIC ---
         try {
@@ -35,7 +37,7 @@ export const authOptions = {
 
               // 1. Get the guest's cart
               const guestCart = dbData.users[guestId]?.cart || [];
-              
+
               // 2. Ensure the real user exists in our local DB
               if (!dbData.users[user.id]) {
                 dbData.users[user.id] = { cart: [] };
