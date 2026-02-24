@@ -25,7 +25,7 @@ export default function RegisterPage() {
     if (res.ok) {
       // 2. Trigger the NextAuth Zitadel flow directly!
       // This immediately redirects them to the IDP login screen.
-      signIn("zitadel", { callbackUrl: "/" }); 
+      signIn("zitadel", { callbackUrl: "/" }, { login_hint: formData.email }); 
     } else {
       console.error("Failed to register");
       setIsLoading(false);

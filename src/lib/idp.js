@@ -72,7 +72,6 @@ export async function getImpersonationToken(userId) {
     actor_token_type: 'urn:ietf:params:oauth:token-type:access_token',
     scope: 'openid profile email',
     client_id: process.env.ZITADEL_CLIENT_ID,
-    client_secret: process.env.ZITADEL_CLIENT_SECRET,
   });
 
   const response = await fetch(`${ZITADEL_API_URL}/oauth/v2/token`, {
