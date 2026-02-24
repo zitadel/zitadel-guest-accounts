@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="./assets/logo.svg" alt="Zitadel Logo" max-height="200px" width="auto" />
+</p>
+
 # Zitadel: The "Shadow Account" Architecture
 
 This application demonstrates how to implement a **"Shadow Account" (Guest) architecture** using the Next.js App Router, NextAuth.js, and Zitadel as the Identity Provider (IDP).
@@ -59,8 +63,7 @@ Because every un-upgraded shadow user is tagged with `metadata` mapping to their
 
 ### 1. Clone and Install
 ```bash
-git clone <repo-url>
-cd guest-auth-demo
+git clone https://github.com/zitadel/zitadel-guest-accounts.git
 npm install
 ```
 
