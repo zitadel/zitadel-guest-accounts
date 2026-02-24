@@ -59,8 +59,8 @@ Because every un-upgraded shadow user is tagged with `metadata` mapping to their
 
 ### 1. Clone and Install
 ```bash
-git clone <repo-url>
-cd guest-auth-demo
+git clone https://github.com/zitadel/zitadel-guest-accounts.git
+cd zitadel-guest-accounts
 npm install
 ```
 
@@ -92,6 +92,12 @@ This specific combination gives your Next.js backend the authority to silently c
 ### 3. Environment Variables
 
 Create a `.env.local` file in the root of your project:
+
+```sh
+cp -b .env.example .env.local
+```
+
+And add the details copied in previous steps:
 
 ```env
 # NextAuth Settings

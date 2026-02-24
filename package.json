@@ -1,5 +1,5 @@
 {
-  "name": "guest-auth-demo",
+  "name": "zitadel-guest-accounts",
   "version": "0.1.0",
   "private": true,
   "scripts": {
