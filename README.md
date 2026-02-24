@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./assets/logo.svg" alt="Zitadel Logo" max-height="200px" width="auto" />
+    <img src="./public/assets/logo.svg" alt="Zitadel Logo" max-height="200px" width="auto" />
 </p>
 
 # Zitadel: The "Shadow Account" Architecture

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSession, signOut, signIn } from "next-auth/react";
+import Image from "next/image";
 
 function decodeJWT(token) {
   if (!token) return null;
@@ -86,7 +87,19 @@ export default function HomePage() {
     <div className="min-h-screen bg-gray-50">
       {/* NAVBAR */}
       <nav className="bg-white shadow-sm p-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold">Guest User Demo Store</h1>
+        <div className="flex items-center gap-4">
+          <Image
+            src="/assets/logo.svg" 
+            alt="Demo App Logo"
+            width={0}
+            height={40}
+            style={{ width: "auto", height: "40px" }}
+            priority
+          />
+          <h1 className="text-xl font-bold">Guest Accounts Demo App</h1>
+        </div>
+
+        {/* RIGHT SIDE: Cart and Auth Buttons */}
         <div className="flex items-center gap-6">
           <div className="font-semibold text-gray-700">
             Cart: {cart.length} item{cart.length !== 1 && "s"}
